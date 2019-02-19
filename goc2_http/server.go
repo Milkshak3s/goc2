@@ -1,17 +1,17 @@
 package goc2_http
 
-import "net"
+import "fmt"
+import "net/http"
+import "strconv"
 
 type HttpServer struct {
-	hostAddr	net.IP
-	hostPort	int
+	port	int
 	results		[]string
 }
 
-func NewHttpServer(ip net.IP, port int) (*HttpServer, error) {
+func NewHttpServer(port int) (*HttpServer, error) {
 	new_server := &HttpServer {
-		hostAddr:	ip,
-		hostPort:	port,
+		port:		port,
 		results:	nil,
 	}
 
@@ -19,7 +19,8 @@ func NewHttpServer(ip net.IP, port int) (*HttpServer, error) {
 }
 
 func (h *HttpServer) Listen() error {
-	
+	actual_port := ":" + strconv.Itoa(h.port)
+
 	return nil
 }
 
@@ -33,4 +34,9 @@ func (h *HttpServer) GetResults() ([]string, error) {
 	h.results = nil
 
 	return return_results, nil
+}
+
+func (h *HttpServer) handleRequest(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "Example return")
+	
 }
