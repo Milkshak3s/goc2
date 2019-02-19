@@ -1,12 +1,12 @@
 package goc2
 
 type Server interface {
-	Listen()				int
-	StageCommands(string)	int
-	GetResults()			([]string, int)
+	Listen()				error
+	StageCommands(string)	error
+	GetResults()			([]string, error)
 }
 
 type Client interface {
-	GetCommands()			([]string, int)
-	SendResults([]string)	int
+	GetCommands()			([]string, error)
+	SendResults([]string)	error
 }
